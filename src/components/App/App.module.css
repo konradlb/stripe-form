@@ -1,0 +1,16 @@
+.root {
+  background-color: #e0ecf7;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  background-color: antiquewhite;
+  width: 750px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
