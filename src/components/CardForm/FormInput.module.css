@@ -57,13 +57,13 @@
   justify-self: stretch;
 }
 
-.number {
+.cardNumber {
   grid-column: 1 / 3;
   grid-row: 4 / 5;
   justify-self: stretch;
 }
 
-.date {
+.cardValidDate {
   grid-column: 1 / 2;
   grid-row: 5 / 6;
 }

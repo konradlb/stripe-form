@@ -1,4 +1,4 @@
-import AppContextProvider from "../context/AppContextProvider";
+import AppContextProvider from "../../context/AppContextProvider";
 import Card from "../Card/Card";
 import CardForm from "../CardForm/CardForm";
 import classes from "./App.module.css";

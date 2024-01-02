@@ -52,4 +52,5 @@
 .cardHolderName,
 .cardValidDate {
   font-size: 1.4rem;
+  height: 16px;
 }

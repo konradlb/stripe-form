@@ -1,3 +1,6 @@
+import { useContext } from "react";
+
+import { AppContext } from "../../context/AppContextProvider";
 import FormInput from "./FormInput";
 
 import UserIcon from "../../assets/user.svg?react";
@@ -8,6 +11,7 @@ import FlagIcon from "../../assets/flag.svg?react";
 
 import classes from "./CardForm.module.css";
 
+const SELETC_NAME = "country";
 const INPUTS_FIELDS = [
   {
     id: 1,
@@ -19,7 +23,7 @@ const INPUTS_FIELDS = [
   },
   {
     id: 2,
-    name: "number",
+    name: "cardNumber",
     label: "Card Number",
     placeholder: "0000 0000 0000 0000",
     type: "number",
@@ -27,7 +31,7 @@ const INPUTS_FIELDS = [
   },
   {
     id: 3,
-    name: "date",
+    name: "cardValidDate",
     label: "Exp Date",
     placeholder: "MM/YY",
     type: "text",
@@ -44,18 +48,7 @@ const INPUTS_FIELDS = [
 ];
 
 const CardForm = () => {
-  // const {} = props;
-
-  const formValues = {
-    name: "Jan Kowalski",
-    number: "123",
-    date: "MM/YY",
-    cvc: "123",
-  };
-
-  const onChange = () => {
-    console.log(onchange);
-  };
+  const { formValues, onChange } = useContext(AppContext);
 
   const inputs = INPUTS_FIELDS.map((input) => (
     <FormInput
@@ -72,7 +65,15 @@ const CardForm = () => {
       <div className={classes.countrySelect}>
         <label className={classes.countrySelectLabel}>country</label>
         <FlagIcon />
-        <select className={classes.countrySelectInput}>
+        <select
+          name={SELETC_NAME}
+          placeholder="select country"
+          onChange={onChange}
+          className={classes.countrySelectInput}
+        >
+          <option className={classes.countrySelectOption} value="" hidden>
+            Wybierz opcję
+          </option>
           <option className={classes.countrySelectOption} value="Polska">
             Polska
           </option>

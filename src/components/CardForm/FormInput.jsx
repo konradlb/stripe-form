@@ -2,7 +2,7 @@ import { func, string, element } from "prop-types";
 import classes from "./FormInput.module.css";
 
 const FormInput = (props) => {
-  const { name, label, type, value, onChange, icon } = props;
+  const { name, label, type, value, placeholder, icon, onChange } = props;
 
   return (
     <div className={`${classes.root} ${classes[name]}`}>
@@ -14,6 +14,7 @@ const FormInput = (props) => {
         className={classes.input}
         name={name}
         onChange={onChange}
+        placeholder={placeholder}
         value={value}
         type={type}
       />
@@ -28,6 +29,7 @@ FormInput.propTypes = {
   label: string.isRequired,
   type: string.isRequired,
   value: string.isRequired,
+  placeholder: string.isRequired,
   onChange: func.isRequired,
   icon: element.isRequired,
 };
