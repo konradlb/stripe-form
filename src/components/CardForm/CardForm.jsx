@@ -2,22 +2,21 @@ import { useContext } from "react";
 
 import { AppContext } from "../../context/AppContextProvider";
 import FormInput from "./FormInput";
+import FormSelect from "./FormSelect";
 
 import UserIcon from "../../assets/user.svg?react";
 import CardIcon from "../../assets/card.svg?react";
 import CalendarIcon from "../../assets/calendar.svg?react";
 import LockIcon from "../../assets/lock.svg?react";
-import FlagIcon from "../../assets/flag.svg?react";
 
 import classes from "./CardForm.module.css";
 
-const SELETC_NAME = "country";
 const INPUTS_FIELDS = [
   {
     id: 1,
     name: "name",
     label: "Cardholder Name",
-    placeholder: "Jan Kowalski",
+    placeholder: "Cardholder Name",
     type: "text",
     icon: <UserIcon />,
   },
@@ -62,27 +61,7 @@ const CardForm = () => {
   return (
     <form className={classes.root}>
       <h2 className={classes.formTitle}>Payment Details</h2>
-      <div className={classes.countrySelect}>
-        <label className={classes.countrySelectLabel}>country</label>
-        <FlagIcon />
-        <select
-          name={SELETC_NAME}
-          placeholder="select country"
-          onChange={onChange}
-          className={classes.countrySelectInput}
-        >
-          <option className={classes.countrySelectOption} value="" hidden>
-            Wybierz opcję
-          </option>
-          <option className={classes.countrySelectOption} value="Polska">
-            Polska
-          </option>
-          <option className={classes.countrySelectOption} value="USA">
-            USA
-          </option>
-        </select>
-      </div>
-
+      <FormSelect />
       {inputs}
       <button type="submit" className={classes.submitButton}>
         Confirm
