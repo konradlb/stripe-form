@@ -41,7 +41,7 @@ const INPUTS_FIELDS = [
     name: "cvc",
     label: "CVC",
     placeholder: "000",
-    type: "number",
+    type: "text",
     icon: <LockIcon />,
   },
 ];

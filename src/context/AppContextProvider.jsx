@@ -31,6 +31,34 @@ const AppContextProvider = (props) => {
       return;
     }
 
+    if (e.target.name === "cardValidDate") {
+      // Condition checking if the value
+      // contains only digits (0-9) and and the forward slash (/).
+      // For the remaining characters, perform a return.
+      if (/^[0-9\s/]+$/.test(e.target.value)) {
+        setFormValues({
+          ...formValues,
+          [e.target.name]: dateAutoFormat(e.target.value),
+        });
+      }
+      return;
+    }
+
+    if (e.target.name === "cvc") {
+      console.log("cvc");
+      // Condition checking if the value
+      // contains only 3 digits (0-9).
+      // For the remaining characters, perform a return.
+      if (/^\d{1,3}$/.test(e.target.value)) {
+        console.log("test cond");
+        setFormValues({
+          ...formValues,
+          [e.target.name]: e.target.value,
+        });
+      }
+      return;
+    }
+
     if (e.target.name === "country") {
       changeCardholderName(e);
       return;
@@ -74,6 +102,30 @@ const AppContextProvider = (props) => {
       return parts.join(" ");
     } else {
       return valueNumber;
+    }
+  };
+
+  const dateAutoFormat = (value) => {
+    let dateValue = value;
+    // if white space -> change to ''. If is not a number between 0-9 -> change to ''
+    let v = dateValue.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
+
+    // min of 2 digits and max of 4
+    let matches = v.match(/\d{2,4}/g);
+    let match = (matches && matches[0]) || "";
+    let parts = [];
+
+    for (let i = 0; i < match.length; i += 2) {
+      // after 4 digits add a new element to the Array
+      // e.g. "4510023" -> [4510, 023]
+      parts.push(match.substring(i, i + 2));
+    }
+
+    if (parts.length) {
+      // add a white space after 4 digits
+      return parts.join("/");
+    } else {
+      return dateValue;
     }
   };
 
