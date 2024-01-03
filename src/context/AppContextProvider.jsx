@@ -15,8 +15,6 @@ const AppContextProvider = (props) => {
   const { children } = props;
   const [formValues, setFormValues] = useState(INITIAL_VALUES);
 
-  console.log(formValues);
-
   const onChange = (e) => {
     if (e.target.name === "cardNumber") {
       // Condition checking if the value
@@ -44,13 +42,24 @@ const AppContextProvider = (props) => {
       return;
     }
 
+    if (e.target.name === "name") {
+      console.log("name");
+      // Condition checking if the value
+      // contains only 25 letters.
+      // For the remaining characters, perform a return.
+      if (/^[a-zA-Z\s]{1,25}$/.test(e.target.value)) {
+        setFormValues({
+          ...formValues,
+          [e.target.name]: e.target.value,
+        });
+      }
+      return;
+    }
     if (e.target.name === "cvc") {
-      console.log("cvc");
       // Condition checking if the value
       // contains only 3 digits (0-9).
       // For the remaining characters, perform a return.
       if (/^\d{1,3}$/.test(e.target.value)) {
-        console.log("test cond");
         setFormValues({
           ...formValues,
           [e.target.name]: e.target.value,
