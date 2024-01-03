@@ -25,7 +25,7 @@ const INPUTS_FIELDS = [
     name: "cardNumber",
     label: "Card Number",
     placeholder: "0000 0000 0000 0000",
-    type: "number",
+    type: "text",
     icon: <CardIcon />,
   },
   {
