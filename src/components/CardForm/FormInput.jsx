@@ -7,7 +7,7 @@ const FormInput = (props) => {
   return (
     <div className={`${classes.root} ${classes[name]}`}>
       <label htmlFor={name} className={classes.label}>
-        {label} <ion-icon name="information-circle" class="info"></ion-icon>
+        {label}
       </label>
       {icon}
       <input

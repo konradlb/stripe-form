@@ -1,22 +1,32 @@
 import React, { useState } from "react";
 import { element } from "prop-types";
 
-export const AppContext = React.createContext(null);
+import {
+  CARD_NUMBER,
+  CARD_VALID_DATE,
+  COUNTRY,
+  CVC,
+  INITIAL_VALUES,
+  JAN_KOWALSKI,
+  JOHN_DOE,
+  NAME,
+  POLSKA,
+  USA,
+} from "../helpers/constants";
 
-const INITIAL_VALUES = {
-  name: "",
-  cardNumber: "",
-  cardValidDate: "",
-  cvc: "",
-  country: "",
-};
+import {
+  dateAutoFormat,
+  numberAutoFormat,
+} from "../helpers/stringAutoFormaters";
+
+export const AppContext = React.createContext(null);
 
 const AppContextProvider = (props) => {
   const { children } = props;
   const [formValues, setFormValues] = useState(INITIAL_VALUES);
 
   const onChange = (e) => {
-    if (e.target.name === "cardNumber") {
+    if (e.target.name === CARD_NUMBER) {
       // Condition checking if the value
       // contains only digits (0-9) and spaces (\s).
       // For the remaining characters, perform a return.
@@ -29,7 +39,7 @@ const AppContextProvider = (props) => {
       return;
     }
 
-    if (e.target.name === "cardValidDate") {
+    if (e.target.name === CARD_VALID_DATE) {
       // Condition checking if the value
       // contains only digits (0-9) and and the forward slash (/).
       // For the remaining characters, perform a return.
@@ -42,8 +52,7 @@ const AppContextProvider = (props) => {
       return;
     }
 
-    if (e.target.name === "name") {
-      console.log("name");
+    if (e.target.name === NAME) {
       // Condition checking if the value
       // contains only 25 letters.
       // For the remaining characters, perform a return.
@@ -55,7 +64,7 @@ const AppContextProvider = (props) => {
       }
       return;
     }
-    if (e.target.name === "cvc") {
+    if (e.target.name === CVC) {
       // Condition checking if the value
       // contains only 3 digits (0-9).
       // For the remaining characters, perform a return.
@@ -68,7 +77,7 @@ const AppContextProvider = (props) => {
       return;
     }
 
-    if (e.target.name === "country") {
+    if (e.target.name === COUNTRY) {
       changeCardholderName(e);
       return;
     }
@@ -79,62 +88,14 @@ const AppContextProvider = (props) => {
   };
 
   const changeCardholderName = (e) => {
-    if (e.target.value === "Polska") {
+    if (e.target.value === POLSKA) {
       setFormValues({
         ...formValues,
-        name: "Jan Kowalski",
-        country: "Polska",
+        name: JAN_KOWALSKI,
+        country: POLSKA,
       });
     } else {
-      setFormValues({ ...formValues, name: "John Doe", country: "USA" });
-    }
-  };
-
-  const numberAutoFormat = (number) => {
-    let valueNumber = number;
-    // if white space change to ''. If is not a number between 0-9 change to ''
-    let v = valueNumber.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
-
-    // the value got min of 4 digits and max of 16
-    let matches = v.match(/\d{4,16}/g);
-    let match = (matches && matches[0]) || "";
-    let parts = [];
-
-    for (let i = 0; i < match.length; i += 4) {
-      // after 4 digits add a new element to the Array
-      // e.g. "4510023" -> [4510, 023]
-      parts.push(match.substring(i, i + 4));
-    }
-
-    if (parts.length) {
-      // add a white space after 4 digits
-      return parts.join(" ");
-    } else {
-      return valueNumber;
-    }
-  };
-
-  const dateAutoFormat = (value) => {
-    let dateValue = value;
-    // if white space -> change to ''. If is not a number between 0-9 -> change to ''
-    let v = dateValue.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
-
-    // min of 2 digits and max of 4
-    let matches = v.match(/\d{2,4}/g);
-    let match = (matches && matches[0]) || "";
-    let parts = [];
-
-    for (let i = 0; i < match.length; i += 2) {
-      // after 4 digits add a new element to the Array
-      // e.g. "4510023" -> [4510, 023]
-      parts.push(match.substring(i, i + 2));
-    }
-
-    if (parts.length) {
-      // add a white space after 4 digits
-      return parts.join("/");
-    } else {
-      return dateValue;
+      setFormValues({ ...formValues, name: JOHN_DOE, country: USA });
     }
   };
 
